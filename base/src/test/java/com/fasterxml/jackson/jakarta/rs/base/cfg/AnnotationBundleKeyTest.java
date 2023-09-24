@@ -1,6 +1,8 @@
 package com.fasterxml.jackson.jakarta.rs.base.cfg;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -42,7 +44,9 @@ public class AnnotationBundleKeyTest
 
     public void testWithClassAnnotations() throws Exception
     {
-        _checkWith(Helper.class.getAnnotations(), Helper.class.getAnnotations());
+        Annotation[] annotations = Helper.class.getAnnotations(); 
+        Arrays.sort(annotations, Comparator.comparing(Annotation::toString)); 
+        _checkWith(annotations, annotations); 
     }
 
     public void testWithMethodAnnotationEquals() throws Exception
